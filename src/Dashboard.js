@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PokemonListItem } from './PokemonListItem';
 
 export class Dashboard extends Component {
     componentDidMount() {
@@ -14,15 +15,8 @@ export class Dashboard extends Component {
     render() {
         return this.state ? (
             <>
-                {this.state.pokemons.map((pokemon, index) => (
-                    <p key={pokemon.name}>
-                        {index + 1}. {pokemon.name}
-                        <img
-                            style={{ height: '100px', width: '100px' }}
-                            src={`https://pokeres.bastionbot.org/images/pokemon/${index + 1}.png`}
-                            alt="pokemon"
-                        />
-                    </p>
+                {this.state.pokemons.map(pokemon => (
+                    <PokemonListItem key={pokemon.id} pokemon={pokemon} />
                 ))}
             </>
         ) : (
