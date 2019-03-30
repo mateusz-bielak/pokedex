@@ -14,11 +14,11 @@ export class Dashboard extends Component {
 
     render() {
         return this.state ? (
-            <>
+            <div style={{ padding: '40px' }}>
                 {this.state.pokemons.map(pokemon => (
                     <PokemonListItem key={pokemon.id} pokemon={pokemon} />
                 ))}
-            </>
+            </div>
         ) : (
             <p>Loading</p>
         );
