@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import pokeball from './assets/pokeball.svg';
+import pokeballGray from './assets/pokeball-gray.svg';
 
 export const PokemonListItem = props => (
     <div
         style={{
-            backgroundColor: '#ED5564',
+            backgroundColor: props.caught ? '#ED5564' : '#7A777E',
             color: '#F5F7FA',
             marginLeft: '20px',
             position: 'relative',
@@ -24,8 +25,9 @@ export const PokemonListItem = props => (
         }}
     >
         <img
-            src={pokeball}
+            src={props.caught ? pokeball : pokeballGray}
             style={{ height: '80px', position: 'absolute', top: '-3px', left: '-40px' }}
+            className="slideRight"
             alt="what"
         />
         <span>{props.pokemon.name}</span>
@@ -39,14 +41,9 @@ export const PokemonListItem = props => (
         >
             #{props.pokemon.id}
         </span>
-        {/* <img
-            style={{ height: '100px', width: '100px' }}
-            src={`https://pokeres.bastionbot.org/images/pokemon/${props.pokemon.id}.png`}
-            alt="pokemon"
-        /> */}
     </div>
 );
-
 PokemonListItem.propTypes = {
+    caught: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
 };

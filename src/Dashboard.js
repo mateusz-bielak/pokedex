@@ -16,7 +16,7 @@ export class Dashboard extends Component {
         return this.state ? (
             <div style={{ padding: '40px' }}>
                 {this.state.pokemons.map(pokemon => (
-                    <PokemonListItem key={pokemon.id} pokemon={pokemon} />
+                    <PokemonListItem key={pokemon.id} pokemon={pokemon} caught={pokemon.id === 1} />
                 ))}
             </div>
         ) : (
