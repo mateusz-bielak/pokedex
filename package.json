@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@emotion/core": "^10.0.10",
+        "@emotion/styled": "^10.0.10",
         "prop-types": "^15.7.2",
         "react": "^16.8.5",
         "react-dom": "^16.8.5"
