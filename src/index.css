@@ -1,5 +1,9 @@
+:root {
+    --main-background-color: #0cbcf2;
+}
+
 body {
-    background-color: #0cbcf2;
+    background-color: var(--main-background-color);
 }
 
 .slideRight {

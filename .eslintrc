@@ -1,5 +1,6 @@
 {
     "extends": ["airbnb", "prettier", "prettier/react"],
+    "plugins": ["sort-imports-es6-autofix"],
     "parserOptions": {
         "ecmaVersion": 9
     },
@@ -28,6 +29,13 @@
         "import/prefer-default-export": 0,
 
         "react/jsx-filename-extension": 0,
-        "react/destructuring-assignment": 0
+        "react/destructuring-assignment": 0,
+
+        "sort-imports-es6-autofix/sort-imports-es6": [
+            1,
+            {
+                "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+            }
+        ]
     }
 }

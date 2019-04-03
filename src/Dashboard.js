@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import styled from '@emotion/styled';
+
 import { PokemonListItem } from './PokemonListItem';
+
+const Wrapper = styled.div`
+    padding: 40px;
+`;
 
 export class Dashboard extends Component {
     componentDidMount() {
@@ -14,11 +20,11 @@ export class Dashboard extends Component {
 
     render() {
         return this.state ? (
-            <div style={{ padding: '40px' }}>
+            <Wrapper>
                 {this.state.pokemons.map(pokemon => (
                     <PokemonListItem key={pokemon.id} pokemon={pokemon} caught={pokemon.id === 1} />
                 ))}
-            </div>
+            </Wrapper>
         ) : (
             <p>Loading</p>
         );
