@@ -1,6 +1,11 @@
 export const colors = {
-    pokeballMainColor: '#ED5564',
-    pokeballSecondaryColor: '#f5f7fa',
-    pokeballBorderColor: '#434a54',
-    missingPokemonColor: '#7A777E',
+    pokeballMain: '#ED5564',
+    pokeballSecondary: '#f5f7fa',
+    pokeballBorder: '#434a54',
+    missingPokemon: '#7A777E',
+};
+
+export const fontSizes = {
+    large: '28px',
+    extraLarge: '36px',
 };

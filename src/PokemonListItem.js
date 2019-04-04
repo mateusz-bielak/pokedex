@@ -2,27 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { colors } from './variables';
+import { colors, fontSizes } from './variables';
 import pokeball from './assets/pokeball.svg';
 import pokeballGray from './assets/pokeball-gray.svg';
 
-const {
-    pokeballMainColor,
-    pokeballSecondaryColor,
-    pokeballBorderColor,
-    missingPokemonColor,
-} = colors;
+const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colors;
 
 const Wrapper = styled.div`
-    background-color: ${props => (props.caught ? pokeballMainColor : missingPokemonColor)};
-    color: ${pokeballSecondaryColor};
+    background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
+    color: ${pokeballSecondary};
     margin-left: 20px;
     position: relative;
     height: 55px;
     margin: 40px 0;
     font-weight: 600;
-    font-size: 28px;
-    border: 3px solid ${pokeballBorderColor};
+    font-size: ${fontSizes.large};
+    border: 3px solid ${pokeballBorder};
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     display: flex;
@@ -39,7 +34,7 @@ const PokeballIcon = styled.img`
 `;
 
 const PokemonHash = styled.span`
-    font-size: 36px;
+    font-size: ${fontSizes.extraLarge};
     position: absolute;
     right: 25px;
     font-style: italic;
