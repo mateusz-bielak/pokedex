@@ -1,17 +1,58 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from '@emotion/styled';
 
-export const PokemonListItem = props => (
-    <p>
-        {props.pokemon.id}. {props.pokemon.name}
-        <img
-            style={{ height: '100px', width: '100px' }}
-            src={`https://pokeres.bastionbot.org/images/pokemon/${props.pokemon.id}.png`}
-            alt="pokemon"
+import { colors, fontSizes } from './variables';
+import pokeball from './assets/pokeball.svg';
+import pokeballGray from './assets/pokeball-gray.svg';
+
+const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colors;
+
+const Wrapper = styled.div`
+    background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
+    color: ${pokeballSecondary};
+    margin-left: 20px;
+    position: relative;
+    height: 55px;
+    margin: 40px 0;
+    font-weight: 600;
+    font-size: ${fontSizes.large};
+    border: 3px solid ${pokeballBorder};
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+`;
+
+const PokeballIcon = styled.img`
+    height: 80px;
+    position: absolute;
+    top: -3px;
+    left: -40px;
+`;
+
+const PokemonHash = styled.span`
+    font-size: ${fontSizes.extraLarge};
+    position: absolute;
+    right: 25px;
+    font-style: italic;
+`;
+
+export const PokemonListItem = ({ caught, pokemon }) => (
+    <Wrapper caught={caught}>
+        <PokeballIcon
+            src={caught ? pokeball : pokeballGray}
+            className="slideRight"
+            alt="pokeball.svg"
         />
-    </p>
+        <span>{pokemon.name}</span>
+        <PokemonHash>#{pokemon.id}</PokemonHash>
+    </Wrapper>
 );
 
 PokemonListItem.propTypes = {
+    caught: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
 };

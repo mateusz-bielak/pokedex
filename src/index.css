@@ -1,0 +1,15 @@
+:root {
+    --main-background-color: #0cbcf2;
+}
+
+body {
+    background-color: var(--main-background-color);
+}
+
+.slideRight {
+    transition: transform 0.3s ease-in-out;
+}
+
+.slideRight:hover {
+    transform: rotate(30deg);
+}
