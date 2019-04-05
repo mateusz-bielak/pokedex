@@ -11,10 +11,9 @@ const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colo
 const Wrapper = styled.div`
     background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
     color: ${pokeballSecondary};
-    margin-left: 20px;
     position: relative;
     height: 55px;
-    margin: 40px 0;
+    margin-bottom: 40px;
     font-weight: 600;
     font-size: ${fontSizes.large};
     border: 3px solid ${pokeballBorder};

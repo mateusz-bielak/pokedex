@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
 
+import { PokemonCard } from './PokemonCard';
 import { PokemonListItem } from './PokemonListItem';
 
+const Container = styled.div`
+    display: flex;
+    padding: 0 20px;
+`;
+
 const Wrapper = styled.div`
-    padding: 40px;
+    width: 40%;
+    padding: 0 20px 0 30px;
 `;
 
 export class Dashboard extends Component {
@@ -20,11 +27,18 @@ export class Dashboard extends Component {
 
     render() {
         return this.state ? (
-            <Wrapper>
-                {this.state.pokemons.map(pokemon => (
-                    <PokemonListItem key={pokemon.id} pokemon={pokemon} caught={pokemon.id === 1} />
-                ))}
-            </Wrapper>
+            <Container>
+                <Wrapper>
+                    {this.state.pokemons.map(pokemon => (
+                        <PokemonListItem
+                            key={pokemon.id}
+                            pokemon={pokemon}
+                            caught={pokemon.id === 1}
+                        />
+                    ))}
+                </Wrapper>
+                <PokemonCard pokemonId="1" />
+            </Container>
         ) : (
             <p>Loading</p>
         );
