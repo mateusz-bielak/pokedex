@@ -6,7 +6,8 @@ import { colors } from './variables';
 
 const Wrapper = styled.div`
     width: 60%;
-    border: 3px solid ${colors.pokeballBorder};
+    border-radius: 20px;
+    background-color: ${colors.pokeballSecondary};
 `;
 
 const Image = styled.img`

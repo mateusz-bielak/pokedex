@@ -5,13 +5,19 @@ import { PokemonCard } from './PokemonCard';
 import { PokemonListItem } from './PokemonListItem';
 
 const Container = styled.div`
+    box-sizing: border-box;
     display: flex;
-    padding: 0 20px;
+    overflow: hidden;
+    max-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 `;
 
 const Wrapper = styled.div`
+    overflow-y: scroll;
     width: 40%;
-    padding: 0 20px 0 30px;
+    padding: 0 20px 0 38px;
 `;
 
 export class Dashboard extends Component {
