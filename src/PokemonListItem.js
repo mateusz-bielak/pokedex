@@ -39,19 +39,20 @@ const PokemonHash = styled.span`
     font-style: italic;
 `;
 
-export const PokemonListItem = ({ caught, pokemon }) => (
-    <Wrapper caught={caught}>
+export const PokemonListItem = ({ caught, pokemon, selectPokemon }) => (
+    <Wrapper caught={caught} onClick={() => selectPokemon(pokemon.id)}>
         <PokeballIcon
             src={caught ? pokeball : pokeballGray}
             className="slideRight"
             alt="pokeball.svg"
         />
         <span>{pokemon.name}</span>
-        <PokemonHash>#{pokemon.id}</PokemonHash>
+        <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
     </Wrapper>
 );
 
 PokemonListItem.propTypes = {
     caught: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
+    selectPokemon: PropTypes.func.isRequired,
 };

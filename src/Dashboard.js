@@ -21,6 +21,16 @@ const Wrapper = styled.div`
 `;
 
 export class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            id: null,
+        };
+
+        this.selectPokemon = this.selectPokemon.bind(this);
+    }
+
     componentDidMount() {
         fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
             .then(res => res.json())
@@ -31,19 +41,24 @@ export class Dashboard extends Component {
             });
     }
 
+    selectPokemon(id) {
+        this.setState({ id });
+    }
+
     render() {
-        return this.state ? (
+        return this.state.pokemons ? (
             <Container>
                 <Wrapper>
                     {this.state.pokemons.map(pokemon => (
                         <PokemonListItem
                             key={pokemon.id}
                             pokemon={pokemon}
-                            caught={pokemon.id === 1}
+                            caught={pokemon.id === this.state.id}
+                            selectPokemon={this.selectPokemon}
                         />
                     ))}
                 </Wrapper>
-                <PokemonCard pokemonId="1" />
+                {this.state.id && <PokemonCard pokemonId={this.state.id} />}
             </Container>
         ) : (
             <p>Loading</p>

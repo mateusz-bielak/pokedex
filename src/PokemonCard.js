@@ -52,6 +52,14 @@ export class PokemonCard extends React.PureComponent {
     }
 
     componentDidMount() {
+        this.fetchPokemonData();
+    }
+
+    componentDidUpdate() {
+        this.fetchPokemonData();
+    }
+
+    fetchPokemonData() {
         const requests = Promise.all([
             fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.pokemonId}`).then(res =>
                 res.json(),
