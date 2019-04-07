@@ -6,12 +6,40 @@ import { colors } from './variables';
 
 const Wrapper = styled.div`
     width: 60%;
+`;
+
+const Header = styled.header`
+    display: flex;
+    align-items: center;
+    width: 100%;
+`;
+
+const NameCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 50px;
+    width: 100%;
+    margin-right: 20px;
+
     border-radius: 20px;
     background-color: ${colors.pokeballSecondary};
 `;
 
+const Name = styled.span`
+    display: block;
+
+    font-weight: bold;
+    text-transform: capitalize;
+`;
+
 const Image = styled.img`
-    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    max-height: 200px;
+    max-width: 200px;
 `;
 
 export class PokemonCard extends React.PureComponent {
@@ -19,30 +47,45 @@ export class PokemonCard extends React.PureComponent {
         super(props);
         this.state = {
             pokemon: undefined,
+            pokemonSpecies: undefined,
         };
     }
 
     componentDidMount() {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.pokemonId}`)
-            .then(res => res.json())
-            .then(pokemon => this.setState({ pokemon }));
+        const requests = Promise.all([
+            fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.pokemonId}`).then(res =>
+                res.json(),
+            ),
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${this.props.pokemonId}`).then(res =>
+                res.json(),
+            ),
+        ]);
+
+        requests.then(([pokemon, pokemonSpecies]) => this.setState({ pokemon, pokemonSpecies }));
     }
 
     render() {
         return (
             <Wrapper>
-                <span>{this.state.pokemon && this.state.pokemon.name}</span>
-                <Image
-                    src={`https://pokeres.bastionbot.org/images/pokemon/${
-                        this.props.pokemonId
-                    }.png`}
-                    alt="poke"
-                />
+                <Header>
+                    <NameCard>
+                        <Name>{this.state.pokemon && this.state.pokemon.name}</Name>
+                        <span>
+                            {this.state.pokemonSpecies && this.state.pokemonSpecies.genera[2].genus}
+                        </span>
+                    </NameCard>
+                    <Image
+                        src={`https://pokeres.bastionbot.org/images/pokemon/${
+                            this.props.pokemonId
+                        }.png`}
+                        alt="poke"
+                    />
+                </Header>
             </Wrapper>
         );
     }
 }
 
 PokemonCard.propTypes = {
-    pokemonId: PropTypes.string.isRequired,
+    pokemonId: PropTypes.number.isRequired,
 };
