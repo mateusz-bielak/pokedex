@@ -2,55 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { api, colors } from './variables';
+import { CardHeader } from './CardHeader';
+import { CardWrapper } from './CardWrapper';
+import { api } from './variables';
 
 const Wrapper = styled.div`
     width: 60%;
-`;
-
-const Header = styled.header`
-    box-sizing: border-box;
-    display: flex;
-    align-items: flex-end;
-    height: 15vw;
-    width: 100%;
-    margin-bottom: 20px;
-`;
-
-const CardWrapper = styled.div`
-    box-sizing: border-box;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: ${colors.pokeballSecondary};
-`;
-
-const NameCard = styled(CardWrapper)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    height: 100%;
-    width: 100%;
-    margin-right: 20px;
-`;
-
-const Name = styled.span`
-    display: block;
-
-    font-weight: bold;
-    text-transform: capitalize;
-`;
-
-const Image = styled.img`
-    box-sizing: border-box;
-    max-height: 15vw;
-    padding: 5px;
-
-    border-radius: 20px;
-    background-color: ${colors.pokeballSecondary};
-
-    filter: ${props => (props.blur ? 'blur(5px)' : 'none')};
 `;
 
 export class PokemonCard extends React.PureComponent {
@@ -61,6 +18,8 @@ export class PokemonCard extends React.PureComponent {
             pokemon: undefined,
             pokemonSpecies: undefined,
         };
+
+        this.onImageLoad = this.onImageLoad.bind(this);
     }
 
     componentDidMount() {
@@ -72,6 +31,16 @@ export class PokemonCard extends React.PureComponent {
             this.fetchPokemonData();
             this.setImageBlur();
         }
+    }
+
+    onImageLoad() {
+        this.setState({ blur: false });
+    }
+
+    getPokemonFlavorText() {
+        return this.state.pokemonSpecies.flavor_text_entries.filter(
+            ({ language: { name } }) => name === 'en',
+        )[0].flavor_text;
     }
 
     setImageBlur() {
@@ -93,25 +62,15 @@ export class PokemonCard extends React.PureComponent {
 
         return (
             <Wrapper>
-                <Header>
-                    <NameCard>
-                        <Name>{pokemon && pokemon.name}</Name>
-                        <span>{pokemonSpecies && pokemonSpecies.genera[2].genus}</span>
-                    </NameCard>
-                    <Image
-                        src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`}
-                        onLoad={() => this.setState({ blur: false })}
-                        blur={blur}
-                        alt="poke"
-                    />
-                </Header>
+                <CardHeader
+                    blur={blur}
+                    genus={pokemonSpecies && pokemonSpecies.genera[2].genus}
+                    name={pokemon && pokemon.name}
+                    onImageLoad={this.onImageLoad}
+                    pokemonId={pokemonId}
+                />
                 <CardWrapper>
-                    <span>
-                        {pokemonSpecies &&
-                            pokemonSpecies.flavor_text_entries.filter(
-                                ({ language: { name } }) => name === 'en',
-                            )[0].flavor_text}
-                    </span>
+                    <span>{pokemonSpecies && this.getPokemonFlavorText()}</span>
                 </CardWrapper>
             </Wrapper>
         );
