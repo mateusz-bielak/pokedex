@@ -9,23 +9,30 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.header`
+    box-sizing: border-box;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    height: 15vw;
     width: 100%;
+    margin-bottom: 20px;
 `;
 
-const NameCard = styled.div`
+const CardWrapper = styled.div`
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: ${colors.pokeballSecondary};
+`;
+
+const NameCard = styled(CardWrapper)`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    height: 50px;
+    height: 100%;
     width: 100%;
     margin-right: 20px;
-
-    border-radius: 20px;
-    background-color: ${colors.pokeballSecondary};
 `;
 
 const Name = styled.span`
@@ -36,10 +43,12 @@ const Name = styled.span`
 `;
 
 const Image = styled.img`
-    height: 100%;
-    width: 100%;
-    max-height: 200px;
-    max-width: 200px;
+    box-sizing: border-box;
+    max-height: 15vw;
+    padding: 5px;
+
+    border-radius: 20px;
+    background-color: ${colors.pokeballSecondary};
 
     filter: ${props => (props.blur ? 'blur(5px)' : 'none')};
 `;
@@ -73,7 +82,7 @@ export class PokemonCard extends React.PureComponent {
         const { pokemonId } = this.props;
         const apiPaths = [`${api}pokemon/${pokemonId}`, `${api}pokemon-species/${pokemonId}`];
 
-        const data = Promise.all([apiPaths.map(apiPath => fetch(apiPath).then(res => res.json()))]);
+        const data = Promise.all(apiPaths.map(apiPath => fetch(apiPath).then(res => res.json())));
 
         data.then(([pokemon, pokemonSpecies]) => this.setState({ pokemon, pokemonSpecies }));
     }
@@ -96,6 +105,14 @@ export class PokemonCard extends React.PureComponent {
                         alt="poke"
                     />
                 </Header>
+                <CardWrapper>
+                    <span>
+                        {pokemonSpecies &&
+                            pokemonSpecies.flavor_text_entries.filter(
+                                ({ language: { name } }) => name === 'en',
+                            )[0].flavor_text}
+                    </span>
+                </CardWrapper>
             </Wrapper>
         );
     }
