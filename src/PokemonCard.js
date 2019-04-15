@@ -11,16 +11,11 @@ const Wrapper = styled.div`
 `;
 
 export class PokemonCard extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            blur: false,
-            pokemon: undefined,
-            pokemonSpecies: undefined,
-        };
-
-        this.onImageLoad = this.onImageLoad.bind(this);
-    }
+    state = {
+        blur: false,
+        pokemon: undefined,
+        pokemonSpecies: undefined,
+    };
 
     componentDidMount() {
         this.fetchPokemonData();
@@ -33,28 +28,27 @@ export class PokemonCard extends React.PureComponent {
         }
     }
 
-    onImageLoad() {
+    onImageLoad = () => {
         this.setState({ blur: false });
-    }
+    };
 
-    getPokemonFlavorText() {
-        return this.state.pokemonSpecies.flavor_text_entries.filter(
+    getPokemonFlavorText = () =>
+        this.state.pokemonSpecies.flavor_text_entries.filter(
             ({ language: { name } }) => name === 'en',
         )[0].flavor_text;
-    }
 
-    setImageBlur() {
+    setImageBlur = () => {
         this.setState({ blur: true });
-    }
+    };
 
-    fetchPokemonData() {
+    fetchPokemonData = () => {
         const { pokemonId } = this.props;
         const apiPaths = [`${api}pokemon/${pokemonId}`, `${api}pokemon-species/${pokemonId}`];
 
         const data = Promise.all(apiPaths.map(apiPath => fetch(apiPath).then(res => res.json())));
 
         data.then(([pokemon, pokemonSpecies]) => this.setState({ pokemon, pokemonSpecies }));
-    }
+    };
 
     render() {
         const { blur, pokemon, pokemonSpecies } = this.state;

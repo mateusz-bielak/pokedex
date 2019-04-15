@@ -21,15 +21,9 @@ const Wrapper = styled.div`
 `;
 
 export class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            id: null,
-        };
-
-        this.selectPokemon = this.selectPokemon.bind(this);
-    }
+    state = {
+        id: null,
+    };
 
     componentDidMount() {
         fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
@@ -41,9 +35,9 @@ export class Dashboard extends Component {
             });
     }
 
-    selectPokemon(id) {
+    selectPokemon = id => {
         this.setState({ id });
-    }
+    };
 
     render() {
         return this.state.pokemons ? (
