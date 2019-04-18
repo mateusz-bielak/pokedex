@@ -1,3 +1,5 @@
+export const api = 'https://pokeapi.co/api/v2/';
+
 export const colors = {
     pokeballMain: '#ED5564',
     pokeballSecondary: '#f5f7fa',

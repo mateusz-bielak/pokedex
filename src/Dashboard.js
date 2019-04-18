@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
 
+import { PokemonCard } from './PokemonCard';
 import { PokemonListItem } from './PokemonListItem';
 
+const Container = styled.div`
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+    max-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+`;
+
 const Wrapper = styled.div`
-    padding: 40px;
+    overflow-y: scroll;
+    width: 40%;
+    padding: 0 20px 0 38px;
 `;
 
 export class Dashboard extends Component {
+    state = {
+        id: null,
+    };
+
     componentDidMount() {
         fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
             .then(res => res.json())
@@ -18,13 +35,25 @@ export class Dashboard extends Component {
             });
     }
 
+    selectPokemon = id => {
+        this.setState({ id });
+    };
+
     render() {
-        return this.state ? (
-            <Wrapper>
-                {this.state.pokemons.map(pokemon => (
-                    <PokemonListItem key={pokemon.id} pokemon={pokemon} caught={pokemon.id === 1} />
-                ))}
-            </Wrapper>
+        return this.state.pokemons ? (
+            <Container>
+                <Wrapper>
+                    {this.state.pokemons.map(pokemon => (
+                        <PokemonListItem
+                            key={pokemon.id}
+                            pokemon={pokemon}
+                            caught={pokemon.id === this.state.id}
+                            selectPokemon={this.selectPokemon}
+                        />
+                    ))}
+                </Wrapper>
+                {this.state.id && <PokemonCard pokemonId={this.state.id} />}
+            </Container>
         ) : (
             <p>Loading</p>
         );

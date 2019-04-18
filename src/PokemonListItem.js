@@ -11,10 +11,9 @@ const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colo
 const Wrapper = styled.div`
     background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
     color: ${pokeballSecondary};
-    margin-left: 20px;
     position: relative;
     height: 55px;
-    margin: 40px 0;
+    margin-bottom: 40px;
     font-weight: 600;
     font-size: ${fontSizes.large};
     border: 3px solid ${pokeballBorder};
@@ -40,19 +39,20 @@ const PokemonHash = styled.span`
     font-style: italic;
 `;
 
-export const PokemonListItem = ({ caught, pokemon }) => (
-    <Wrapper caught={caught}>
+export const PokemonListItem = ({ caught, pokemon, selectPokemon }) => (
+    <Wrapper caught={caught} onClick={() => selectPokemon(pokemon.id)}>
         <PokeballIcon
             src={caught ? pokeball : pokeballGray}
             className="slideRight"
             alt="pokeball.svg"
         />
         <span>{pokemon.name}</span>
-        <PokemonHash>#{pokemon.id}</PokemonHash>
+        <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
     </Wrapper>
 );
 
 PokemonListItem.propTypes = {
     caught: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
+    selectPokemon: PropTypes.func.isRequired,
 };
