@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 
+import { PokemonCard } from './PokemonCard';
 import { colors, fontSizes } from './variables';
 import pokeball from './assets/pokeball.svg';
 import pokeballGray from './assets/pokeball-gray.svg';
@@ -39,20 +40,23 @@ const PokemonHash = styled.span`
     font-style: italic;
 `;
 
-export const PokemonListItem = ({ caught, pokemon, selectPokemon }) => (
-    <Wrapper caught={caught} onClick={() => selectPokemon(pokemon.id)}>
-        <PokeballIcon
-            src={caught ? pokeball : pokeballGray}
-            className="slideRight"
-            alt="pokeball.svg"
-        />
-        <span>{pokemon.name}</span>
-        <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
-    </Wrapper>
+export const PokemonListItem = ({ selected, pokemon, selectPokemon }) => (
+    <>
+        <Wrapper selected={selected} onClick={() => selectPokemon(pokemon.id)}>
+            <PokeballIcon
+                src={selected ? pokeball : pokeballGray}
+                className="slideRight"
+                alt="pokeball.svg"
+            />
+            <span>{pokemon.name}</span>
+            <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
+        </Wrapper>
+        {selected && <PokemonCard pokemonId={pokemon.id} />}
+    </>
 );
 
 PokemonListItem.propTypes = {
-    caught: PropTypes.bool.isRequired,
+    selected: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
     selectPokemon: PropTypes.func.isRequired,
 };

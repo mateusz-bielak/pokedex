@@ -7,7 +7,14 @@ import { CardWrapper } from './CardWrapper';
 import { api } from './variables';
 
 const Wrapper = styled.div`
-    width: 60%;
+    @media (min-width: 940px) {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        width: 60%;
+    }
 `;
 
 export class PokemonCard extends React.PureComponent {
