@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 
 import { CardHeader } from './CardHeader';
 import { CardWrapper } from './CardWrapper';
-import { api } from './variables';
+import { api, breakpoints } from './variables';
 
 const Wrapper = styled.div`
-    @media (min-width: 940px) {
+    ${breakpoints.large} {
         position: absolute;
         right: 20px;
         top: 20px;

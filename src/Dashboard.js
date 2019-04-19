@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from '@emotion/styled';
 
 import { PokemonListItem } from './PokemonListItem';
+import { breakpoints } from './variables';
 
 const Container = styled.div`
     box-sizing: border-box;
@@ -16,9 +17,9 @@ const Container = styled.div`
 const Wrapper = styled.div`
     box-sizing: border-box;
     overflow-y: scroll;
-    padding: 0 20px 0 38px;
+    padding: 10px 20px 10px 38px;
 
-    @media (min-width: 940px) {
+    ${breakpoints.large} {
         width: 40%;
     }
 `;

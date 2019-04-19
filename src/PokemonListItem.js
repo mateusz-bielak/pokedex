@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { PokemonCard } from './PokemonCard';
-import { colors, fontSizes } from './variables';
+import { breakpoints, colors, fontSizes } from './variables';
 import pokeball from './assets/pokeball.svg';
 import pokeballGray from './assets/pokeball-gray.svg';
 
@@ -13,31 +13,46 @@ const Wrapper = styled.div`
     background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
     color: ${pokeballSecondary};
     position: relative;
-    height: 55px;
-    margin-bottom: 40px;
+    height: 40px;
+    margin-bottom: 25px;
     font-weight: 600;
-    font-size: ${fontSizes.large};
-    border: 3px solid ${pokeballBorder};
+    font-size: ${fontSizes.medium};
+    border: 2px solid ${pokeballBorder};
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: capitalize;
+
+    ${breakpoints.large} {
+        height: 55px;
+        margin-bottom: 40px;
+        font-size: ${fontSizes.large};
+    }
 `;
 
 const PokeballIcon = styled.img`
-    height: 80px;
+    height: 50px;
     position: absolute;
     top: -3px;
-    left: -40px;
+    left: -26px;
+
+    ${breakpoints.large} {
+        height: 80px;
+        left: -40px;
+    }
 `;
 
 const PokemonHash = styled.span`
-    font-size: ${fontSizes.extraLarge};
+    font-size: ${fontSizes.large};
     position: absolute;
     right: 25px;
     font-style: italic;
+
+    ${breakpoints.large} {
+        font-size: ${fontSizes.extraLarge};
+    }
 `;
 
 export const PokemonListItem = ({ selected, pokemon, selectPokemon }) => (
