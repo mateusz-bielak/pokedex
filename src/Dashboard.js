@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
 
-import { PokemonCard } from './PokemonCard';
 import { PokemonListItem } from './PokemonListItem';
+import { breakpoints } from './variables';
 
 const Container = styled.div`
     box-sizing: border-box;
     display: flex;
+    position: relative;
     overflow: hidden;
     max-height: 100vh;
     max-width: 1200px;
@@ -15,14 +16,19 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+    box-sizing: border-box;
     overflow-y: scroll;
-    width: 40%;
-    padding: 0 20px 0 38px;
+    width: 100%;
+    padding: 10px 20px 10px 38px;
+
+    ${breakpoints.large} {
+        width: 40%;
+    }
 `;
 
 export class Dashboard extends Component {
     state = {
-        id: null,
+        selectedPokemonId: 1,
     };
 
     componentDidMount() {
@@ -35,8 +41,8 @@ export class Dashboard extends Component {
             });
     }
 
-    selectPokemon = id => {
-        this.setState({ id });
+    selectPokemon = selectedPokemonId => {
+        this.setState({ selectedPokemonId });
     };
 
     render() {
@@ -47,12 +53,11 @@ export class Dashboard extends Component {
                         <PokemonListItem
                             key={pokemon.id}
                             pokemon={pokemon}
-                            caught={pokemon.id === this.state.id}
+                            selectedPokemonId={pokemon.id === this.state.selectedPokemonId}
                             selectPokemon={this.selectPokemon}
                         />
                     ))}
                 </Wrapper>
-                {this.state.id && <PokemonCard pokemonId={this.state.id} />}
             </Container>
         ) : (
             <p>Loading</p>
