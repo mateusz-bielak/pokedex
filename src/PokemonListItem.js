@@ -10,7 +10,7 @@ import pokeballGray from './assets/pokeball-gray.svg';
 const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colors;
 
 const Wrapper = styled.div`
-    background-color: ${props => (props.caught ? pokeballMain : missingPokemon)};
+    background-color: ${props => (props.selectedPokemonId ? pokeballMain : missingPokemon)};
     color: ${pokeballSecondary};
     position: relative;
     height: 40px;
@@ -55,23 +55,23 @@ const PokemonHash = styled.span`
     }
 `;
 
-export const PokemonListItem = ({ selected, pokemon, selectPokemon }) => (
+export const PokemonListItem = ({ selectedPokemonId, pokemon, selectPokemon }) => (
     <>
-        <Wrapper selected={selected} onClick={() => selectPokemon(pokemon.id)}>
+        <Wrapper selectedPokemonId={selectedPokemonId} onClick={() => selectPokemon(pokemon.id)}>
             <PokeballIcon
-                src={selected ? pokeball : pokeballGray}
+                src={selectedPokemonId ? pokeball : pokeballGray}
                 className="slideRight"
                 alt="pokeball.svg"
             />
             <span>{pokemon.name}</span>
             <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
         </Wrapper>
-        {selected && <PokemonCard pokemonId={pokemon.id} />}
+        {selectedPokemonId && <PokemonCard pokemonId={pokemon.id} />}
     </>
 );
 
 PokemonListItem.propTypes = {
-    selected: PropTypes.bool.isRequired,
+    selectedPokemonId: PropTypes.bool.isRequired,
     pokemon: PropTypes.shape({ id: PropTypes.number, name: PropTypes.string }).isRequired,
     selectPokemon: PropTypes.func.isRequired,
 };

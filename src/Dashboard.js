@@ -7,6 +7,7 @@ import { breakpoints } from './variables';
 const Container = styled.div`
     box-sizing: border-box;
     display: flex;
+    position: relative;
     overflow: hidden;
     max-height: 100vh;
     max-width: 1200px;
@@ -17,6 +18,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
     box-sizing: border-box;
     overflow-y: scroll;
+    width: 100%;
     padding: 10px 20px 10px 38px;
 
     ${breakpoints.large} {
@@ -51,7 +53,7 @@ export class Dashboard extends Component {
                         <PokemonListItem
                             key={pokemon.id}
                             pokemon={pokemon}
-                            selected={pokemon.id === this.state.selectedPokemonId}
+                            selectedPokemonId={pokemon.id === this.state.selectedPokemonId}
                             selectPokemon={this.selectPokemon}
                         />
                     ))}

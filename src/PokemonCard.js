@@ -7,6 +7,9 @@ import { CardWrapper } from './CardWrapper';
 import { api, breakpoints } from './variables';
 
 const Wrapper = styled.div`
+    width: 100%;
+    margin-bottom: 20px;
+
     ${breakpoints.large} {
         position: absolute;
         right: 20px;
@@ -26,26 +29,20 @@ export class PokemonCard extends React.PureComponent {
 
     componentDidMount() {
         this.fetchPokemonData();
+        this.setImageBlur();
     }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.pokemonId !== this.props.pokemonId) {
-            this.fetchPokemonData();
-            this.setImageBlur();
-        }
-    }
-
-    onImageLoad = () => {
-        this.setState({ blur: false });
-    };
 
     getPokemonFlavorText = () =>
         this.state.pokemonSpecies.flavor_text_entries.filter(
             ({ language: { name } }) => name === 'en',
         )[0].flavor_text;
 
-    setImageBlur = () => {
-        this.setState({ blur: true });
+    onImageLoad = () => {
+        this.setImageBlur(false);
+    };
+
+    setImageBlur = (blur = true) => {
+        this.setState({ blur });
     };
 
     fetchPokemonData = () => {
