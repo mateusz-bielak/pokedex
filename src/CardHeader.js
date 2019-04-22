@@ -3,15 +3,20 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { CardWrapper } from './CardWrapper';
-import { colors } from './variables';
+import { breakpoints, colors } from './variables';
 
 const Header = styled.header`
     box-sizing: border-box;
     display: flex;
     align-items: flex-end;
-    height: 15vw;
+    height: 20vw;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    ${breakpoints.large} {
+        height: 15vw;
+        margin-bottom: 20px;
+    }
 `;
 
 const NameCard = styled(CardWrapper)`
@@ -22,7 +27,12 @@ const NameCard = styled(CardWrapper)`
 
     height: 100%;
     width: 100%;
-    margin-right: 20px;
+    margin-right: 5px;
+    text-align: center;
+
+    ${breakpoints.large} {
+        margin-right: 20px;
+    }
 `;
 
 const Name = styled.span`
@@ -34,7 +44,7 @@ const Name = styled.span`
 
 const Image = styled.img`
     box-sizing: border-box;
-    max-height: 15vw;
+    max-height: 100%;
     padding: 5px;
 
     border-radius: 20px;

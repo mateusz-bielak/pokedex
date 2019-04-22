@@ -10,24 +10,28 @@ import pokeballGray from './assets/pokeball-gray.svg';
 const { pokeballMain, pokeballSecondary, pokeballBorder, missingPokemon } = colors;
 
 const Wrapper = styled.div`
-    background-color: ${props => (props.selectedPokemonId ? pokeballMain : missingPokemon)};
-    color: ${pokeballSecondary};
     position: relative;
-    height: 40px;
-    margin-bottom: 25px;
-    font-weight: 600;
-    font-size: ${fontSizes.medium};
-    border: 2px solid ${pokeballBorder};
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    height: 40px;
+    margin: 10px 0;
+    padding: 0 10px 0 30px;
+    border: 2px solid ${pokeballBorder};
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    font-weight: 600;
+    font-size: ${fontSizes.medium};
     text-transform: capitalize;
+
+    background-color: ${props => (props.selectedPokemonId ? pokeballMain : missingPokemon)};
+    color: ${pokeballSecondary};
 
     ${breakpoints.large} {
         height: 55px;
-        margin-bottom: 40px;
+        margin: 0 0 40px 0;
         font-size: ${fontSizes.large};
     }
 `;
@@ -44,13 +48,17 @@ const PokeballIcon = styled.img`
     }
 `;
 
+const PokemonName = styled.span`
+    flex-grow: 1;
+    text-align: center;
+`;
+
 const PokemonHash = styled.span`
     font-size: ${fontSizes.large};
-    position: absolute;
-    right: 25px;
     font-style: italic;
 
     ${breakpoints.large} {
+        right: 25px;
         font-size: ${fontSizes.extraLarge};
     }
 `;
@@ -63,7 +71,7 @@ export const PokemonListItem = ({ selectedPokemonId, pokemon, selectPokemon }) =
                 className="slideRight"
                 alt="pokeball.svg"
             />
-            <span>{pokemon.name}</span>
+            <PokemonName>{pokemon.name}</PokemonName>
             <PokemonHash hey="heyho">#{pokemon.id}</PokemonHash>
         </Wrapper>
         {selectedPokemonId && <PokemonCard pokemonId={pokemon.id} />}

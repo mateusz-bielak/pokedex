@@ -8,7 +8,7 @@ import { api, breakpoints } from './variables';
 
 const Wrapper = styled.div`
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     ${breakpoints.large} {
         position: absolute;
@@ -17,6 +17,7 @@ const Wrapper = styled.div`
         padding-left: 20px;
         box-sizing: border-box;
         width: 60%;
+        margin-bottom: 20px;
     }
 `;
 
