@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly CardHeader component 1`] = `
+<Styled(header)>
+  <Styled(div)>
+    <Styled(span)>
+      Bulbasaur
+    </Styled(span)>
+    <span>
+      Seed Pokémon
+    </span>
+  </Styled(div)>
+  <Styled(img)
+    alt="poke"
+    blur={false}
+    onLoad={[MockFunction]}
+    src="https://pokeres.bastionbot.org/images/pokemon/1.png"
+  />
+</Styled(header)>
+`;
