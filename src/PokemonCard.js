@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { CardHeader } from './CardHeader';
 import { CardWrapper } from './CardWrapper';
-import { api, breakpoints } from './variables';
+import { breakpoints, urls } from './variables';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -48,7 +48,10 @@ export class PokemonCard extends React.PureComponent {
 
     fetchPokemonData = () => {
         const { pokemonId } = this.props;
-        const apiPaths = [`${api}pokemon/${pokemonId}`, `${api}pokemon-species/${pokemonId}`];
+        const apiPaths = [
+            `${urls.api}pokemon/${pokemonId}`,
+            `${urls.api}pokemon-species/${pokemonId}`,
+        ];
 
         const data = Promise.all(apiPaths.map(apiPath => fetch(apiPath).then(res => res.json())));
 

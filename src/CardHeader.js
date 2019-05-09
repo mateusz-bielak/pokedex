@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { CardWrapper } from './CardWrapper';
-import { breakpoints, colors } from './variables';
+import { breakpoints, colors, getImageSrc } from './variables';
 
 const Header = styled.header`
     box-sizing: border-box;
@@ -59,12 +59,7 @@ export const CardHeader = ({ blur, genus, name, onImageLoad, pokemonId }) => (
             <Name>{name}</Name>
             <span>{genus}</span>
         </NameCard>
-        <Image
-            src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonId}.png`}
-            onLoad={onImageLoad}
-            blur={blur}
-            alt="poke"
-        />
+        <Image src={getImageSrc(pokemonId)} onLoad={onImageLoad} blur={blur} alt="name.png" />
     </Header>
 );
 

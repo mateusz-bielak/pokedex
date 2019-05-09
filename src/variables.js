@@ -1,4 +1,9 @@
-export const api = 'https://pokeapi.co/api/v2/';
+export const urls = {
+    api: 'https://pokeapi.co/api/v2/',
+    imageApi: 'https://pokeres.bastionbot.org/images/pokemon/',
+};
+
+export const getImageSrc = id => `${urls.imageApi}${id}.png`;
 
 const mediaQ = size => `@media (min-width: ${size}px)`;
 
